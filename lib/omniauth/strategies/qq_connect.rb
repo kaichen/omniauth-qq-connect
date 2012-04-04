@@ -19,13 +19,7 @@ module OmniAuth
       }
 
       uid do
-        raw_info
-      end
-
-      info { user_info }
-
-      def raw_info
-        @raw_info ||= begin
+        @uid ||= begin
           access_token.options[:mode] = :query
           access_token.options[:param_name] = :access_token
           # Response Example: "callback( {\"client_id\":\"11111\",\"openid\":\"000000FFFF\"} );\n"
@@ -36,8 +30,22 @@ module OmniAuth
         end
       end
 
-      def user_info
-        @user_info ||= begin
+      info do 
+        { 
+          :nickname => raw_info['nickname'],
+          :name => raw_info['nickname'], # Since it is required, fill it with nickname
+          :image => raw_info['figureurl_1'],
+        }
+      end
+      
+      extra do
+        {
+          :raw_info => raw_info
+        }
+      end
+
+      def raw_info
+        @raw_info ||= begin
           #TODO handle error case
           #TODO make info request url configurable
           client.request(:get, "https://graph.qq.com/user/get_user_info", :params => {
