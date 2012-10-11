@@ -18,6 +18,8 @@ module OmniAuth
         :parse => :query
       }
 
+      option :authorize_options, [:scope]
+
       uid do
         @uid ||= begin
           access_token.options[:mode] = :query

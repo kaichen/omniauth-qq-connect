@@ -24,7 +24,26 @@ Or install it yourself as:
       provider :qq_connect, ENV['QQ_CONNECT_APP_KEY'], ENV['QQ_CONNECT_APP_SECRET']
     end
 
-*Notice* you only allow send the auth request from host(w/o port) list of application.
+*Notice* you only allow send the auth request from host(w/o port) list of
+application.
+
+## Configuring
+
+You can configure several options(currently only one), which you pass in to
+the provider method via a Hash:
+
+scope: A comma-separated list of permissions you want to request from the
+user. See the official docs for a full list of available permissions:
+<http://wiki.opensns.qq.com/wiki/%E3%80%90QQ%E7%99%BB%E5%BD%95%E3%80%91API%E6%96%87%E6%A1%A3>
+Default: `get_user_info`(获取用户在QQ空间的个人资料)
+
+Example:
+
+    use OmniAuth::Builder do
+      provider :qq_connect,
+        ENV['QQ_CONNECT_API_KEY'], ENV['QQ_CONNECT_API_SECRET'],
+        scope: "get_user_info,add_share"
+    end
 
 ## Contributing
 
