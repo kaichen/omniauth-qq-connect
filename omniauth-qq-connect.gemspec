@@ -16,5 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Omniauth::Qq::Connect::VERSION
 
   gem.add_dependency 'omniauth', '~> 1.0'
-  gem.add_dependency 'omniauth-oauth2', '~> 1.0'
+  gem.add_dependency 'omniauth-oauth2', '~> 1.3.1'
 end
